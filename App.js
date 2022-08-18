@@ -1,13 +1,12 @@
-import { StyleSheet, Text, View, TextInput, Button , Image } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
 import { useState } from "react";
-import { ScrollView } from "react-native-web";
+import { FlatList, ScrollView } from "react-native-web";
 
 export default function App() {
   //on utilise le usestate pour recuper les valeurs des champs
   //on declare des variable tableaux  vide pour les remplires
   const [lienTextSaisie, setLienTextSaisie] = useState("");
   const [ListeLien, setListeLien] = useState([""]);
-  
 
   function ajoutLienHandler() {
     console.log(lienTextSaisie);
@@ -20,16 +19,20 @@ export default function App() {
     //console.log(textsaisie);
   }
   return (
-    <View style={styles.container}> 
-    <View style={styles.photos}> <Image source={require('./assets/icon.png')}  style={styles.img}/>
-      <Image source={{uri: 'https://i.skyrock.net/8326/64528326/pics/2868188836_1.jpg'}}
-       style={styles.img} />
-       </View>
-    
+    <View style={styles.container}>
+      <View style={styles.photos}>
+        {" "}
+        <Image source={require("./assets/icon.png")} style={styles.img} />
+        <Image
+          source={{
+            uri: "https://i.skyrock.net/8326/64528326/pics/2868188836_1.jpg",
+          }}
+          style={styles.img}
+        />
+      </View>
+
       <View style={styles.inputContainer}>
-      <View style={styles.container}>
-    
-    </View>
+        <View style={styles.container}></View>
         <TextInput
           placeholder="Nouveau lien.. "
           style={styles.inputLien}
@@ -40,13 +43,16 @@ export default function App() {
       </View>
       <View style={styles.lienContainer}>
         <Text>Liste des liens ...</Text>
-<ScrollView>
+        {/* <ScrollView>
         {ListeLien.map((lien) => (<Text key={lien}>{lien}</Text>))}
-</ScrollView>
+</ScrollView> */}
+        <FlatList
+          data={ListeLien}
+          renderItem={({ item }) => (<Text>{item}</Text>)}
+        />
       </View>
     </View>
   );
-
 }
 
 const styles = StyleSheet.create({
@@ -70,16 +76,15 @@ const styles = StyleSheet.create({
   lienContainer: {
     //flex: 3,
     height: 100,
-    borderColor:"yellow",
+    borderColor: "yellow",
     borderWidth: 2,
   },
   img: {
-    margin:20,
+    margin: 20,
     width: 100,
-     height: 100,
+    height: 100,
   },
   photos: {
-flexDirection:"row-reverse",
-
-  }
+    flexDirection: "row-reverse",
+  },
 });
