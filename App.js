@@ -20,11 +20,15 @@ export default function App() {
     //console.log(textsaisie);
   }
   return (
-    <View style={styles.container}>
+    <View style={styles.container}> 
+    <View style={styles.photos}> <Image source={require('./assets/icon.png')}  style={styles.img}/>
+      <Image source={{uri: 'https://i.skyrock.net/8326/64528326/pics/2868188836_1.jpg'}}
+       style={styles.img} />
+       </View>
+    
       <View style={styles.inputContainer}>
       <View style={styles.container}>
-      <Image source={{uri: 'https://cdn.pixabay.com/photo/2021/02/25/14/12/rinnegan-6049194_960_720.png'}}
-       style={styles.img} />
+    
     </View>
         <TextInput
           placeholder="Nouveau lien.. "
@@ -69,9 +73,13 @@ const styles = StyleSheet.create({
     borderColor:"yellow",
     borderWidth: 2,
   },
-  img:{
-    
+  img: {
+    margin:20,
     width: 100,
      height: 100,
+  },
+  photos: {
+flexDirection:"row-reverse",
+
   }
 });
