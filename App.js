@@ -26,6 +26,7 @@ export default function App() {
     setLienTextSaisie(Textsaisie);
     //console.log(textsaisie);
   }
+  // creation de la fonction delete
   function deleteLienHandler(id)
   {
 setListeLien((currentListLiens) => {
@@ -38,7 +39,7 @@ setListeLien((currentListLiens) => {
   return (
     <View style={styles.container}>
       <View style={styles.photos}>
-        {" "}
+        
         <Image source={require("./assets/icon.png")} style={styles.img} />
         <Image
           source={{
@@ -71,6 +72,7 @@ setListeLien((currentListLiens) => {
               <LienItem 
               text={itemData.item.text} 
               id={itemData.item.id}
+              //props pour la fonction
               onDeleteItem={deleteLienHandler}
               />
             );
