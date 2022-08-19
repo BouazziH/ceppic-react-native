@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
 import { useState } from "react";
 import { FlatList, ScrollView } from "react-native-web";
+import LienItem from "./components/LienItem";
 
 export default function App() {
   //on utilise le usestate pour recuper les valeurs des champs
@@ -59,9 +60,7 @@ export default function App() {
           }}
           renderItem={(itemData) => {
              return (
-<View style={styles.lienItem}>
-  <Text>{itemData.item.text}</Text>
-</View>
+             <LienItem  text={itemData.item.text}/>
           )}}
         />
       </View>
@@ -102,10 +101,5 @@ const styles = StyleSheet.create({
   photos: {
     flexDirection: "row-reverse",
   },
-  lienItem: {
-    backgroundColor:"#edcedc",
-    marginTop:20,
-    padding:8,
-    color:"#ggg",
-  }
+  
 });
