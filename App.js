@@ -10,8 +10,14 @@ export default function App() {
 
   function ajoutLienHandler() {
     console.log(lienTextSaisie);
-    setListeLien([...ListeLien, lienTextSaisie]);
-    setLienTextSaisie("");
+    //pour ajouter les liens saisie a la liste le code en dessous
+   // setListeLien([...ListeLien, lienTextSaisie]);
+   setListeLien(currentListLiens => 
+    [...ListeLien,{text:lienTextSaisie, id : Math.random().toString()}]); 
+   setLienTextSaisie("");
+
+
+
   }
   function lienInputHandler(Textsaisie) {
     //affecter la valeur entrer au sette
@@ -25,7 +31,7 @@ export default function App() {
         <Image source={require("./assets/icon.png")} style={styles.img} />
         <Image
           source={{
-            uri: "https://i.skyrock.net/8326/64528326/pics/2868188836_1.jpg",
+            uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Mangekyou_Sharingan_Sasuke.svg/768px-Mangekyou_Sharingan_Sasuke.svg.png",
           }}
           style={styles.img}
         />
@@ -48,7 +54,15 @@ export default function App() {
 </ScrollView> */}
         <FlatList
           data={ListeLien}
-          renderItem={({ item }) => (<Text>{item}</Text>)}
+          keyExtractor={(item, index) => {
+            return item.id
+          }}
+          renderItem={(itemData) => {
+             return (
+<View style={styles.lienItem}>
+  <Text>{itemData.item.text}</Text>
+</View>
+          )}}
         />
       </View>
     </View>
@@ -78,6 +92,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderColor: "yellow",
     borderWidth: 2,
+    padding:8,
   },
   img: {
     margin: 20,
@@ -87,4 +102,10 @@ const styles = StyleSheet.create({
   photos: {
     flexDirection: "row-reverse",
   },
+  lienItem: {
+    backgroundColor:"#edcedc",
+    marginTop:20,
+    padding:8,
+    color:"#ggg",
+  }
 });
