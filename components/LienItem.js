@@ -1,7 +1,7 @@
 import { StyleSheet,View ,Text } from "react-native-web"
 
 export default function LienItem(props) {
-    
+    // ajour du props
     return(
 <View style={styles.lienItem}>
   <Text style={styles.lienText}>{props.text}</Text>
@@ -18,6 +18,6 @@ export default function LienItem(props) {
         color:"#ggg",
       },
       lienText:{
-        color:"yellow",
+        color:"green",
       }
  });
