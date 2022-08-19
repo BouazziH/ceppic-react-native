@@ -1,24 +1,24 @@
-import { StyleSheet, Text, View, TextInput, Button, Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { useState } from "react";
 import { FlatList, ScrollView } from "react-native-web";
 import LienItem from "./components/LienItem";
+import LienInput from "./components/LienInput";
 
 export default function App() {
   //on utilise le usestate pour recuper les valeurs des champs
   //on declare des variable tableaux  vide pour les remplires
   const [lienTextSaisie, setLienTextSaisie] = useState("");
-  const [ListeLien, setListeLien] = useState([""]);
+  const [ListeLien, setListeLien] = useState([]);
 
   function ajoutLienHandler() {
     console.log(lienTextSaisie);
     //pour ajouter les liens saisie a la liste le code en dessous
-   // setListeLien([...ListeLien, lienTextSaisie]);
-   setListeLien(currentListLiens => 
-    [...ListeLien,{text:lienTextSaisie, id : Math.random().toString()}]); 
-   setLienTextSaisie("");
-
-
-
+    // setListeLien([...ListeLien, lienTextSaisie]);
+    setListeLien((currentListLiens) => [
+      ...ListeLien,
+      { text: lienTextSaisie, id: Math.random().toString() },
+    ]);
+    setLienTextSaisie("");
   }
   function lienInputHandler(Textsaisie) {
     //affecter la valeur entrer au sette
@@ -38,16 +38,13 @@ export default function App() {
         />
       </View>
 
-      <View style={styles.inputContainer}>
-        <View style={styles.container}></View>
-        <TextInput
-          placeholder="Nouveau lien.. "
-          style={styles.inputLien}
-          onChangeText={lienInputHandler}
-          value={lienTextSaisie}
-        />
-        <Button title="Ajouter un lien" onPress={ajoutLienHandler} />
-      </View>
+      
+        {/*<View style={styles.container}></View>*/}
+       
+<LienInput  Button={ajoutLienHandler} TextIn={lienInputHandler} lienTextSaisie={lienTextSaisie}/>
+
+
+    
       <View style={styles.lienContainer}>
         <Text>Liste des liens ...</Text>
         {/* <ScrollView>
@@ -56,12 +53,14 @@ export default function App() {
         <FlatList
           data={ListeLien}
           keyExtractor={(item, index) => {
-            return item.id
+            return item.id;
           }}
           renderItem={(itemData) => {
-             return (
-             <LienItem  text={itemData.item.text}/>
-          )}}
+            return (
+              //separation du code on le mettant dans un composant
+              <LienItem text={itemData.item.text} />
+            );
+          }}
         />
       </View>
     </View>
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
     height: 100,
     borderColor: "yellow",
     borderWidth: 2,
-    padding:8,
+    padding: 8,
   },
   img: {
     margin: 20,
@@ -101,5 +100,4 @@ const styles = StyleSheet.create({
   photos: {
     flexDirection: "row-reverse",
   },
-  
 });
