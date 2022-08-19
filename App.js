@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { useState } from "react";
-import { FlatList, ScrollView } from "react-native-web";
+import { FlatList, ScrollView } from "react-native";
 import LienItem from "./components/LienItem";
 import LienInput from "./components/LienInput";
 
@@ -20,11 +20,21 @@ export default function App() {
     ]);
     setLienTextSaisie("");
   }
+
   function lienInputHandler(Textsaisie) {
     //affecter la valeur entrer au sette
     setLienTextSaisie(Textsaisie);
     //console.log(textsaisie);
   }
+  function deleteLienHandler(id)
+  {
+setListeLien((currentListLiens) => {
+  return currentListLiens.filter((lien) =>
+   lien.id !== id);
+});
+
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.photos}>
@@ -58,7 +68,11 @@ export default function App() {
           renderItem={(itemData) => {
             return (
               //separation du code on le mettant dans un composant
-              <LienItem text={itemData.item.text} />
+              <LienItem 
+              text={itemData.item.text} 
+              id={itemData.item.id}
+              onDeleteItem={deleteLienHandler}
+              />
             );
           }}
         />
